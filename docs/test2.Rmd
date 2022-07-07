@@ -8,6 +8,8 @@ output:
 
 ```{r setup, include=FALSE}
 library(flexdashboard)
+library(tidyverse)
+library(plotly)
 ```
 
 Column {data-width=650}
@@ -16,6 +18,7 @@ Column {data-width=650}
 ### Chart A
 
 ```{r}
+gapminder <- gapminder::gapminder
 gapminder %>% # Which dataset are you using
   plot_ly(x = ~lifeExp, # Which variable(s) are you plotting
           type = "histogram") # Which type of plot are you making
@@ -27,12 +30,18 @@ Column {data-width=350}
 ### Chart B
 
 ```{r}
+plot <- gapminder %>% # Which dataset are you using
+  ggplot(aes(lifeExp)) + # Which variable(s) are you plotting
+  geom_histogram() # Which type of plot are you making
 
+ggplotly(plot)
 ```
 
 ### Chart C
 
 ```{r}
+library(DT)
 
+DT::datatable(gapminder)
 ```
 
